@@ -17,8 +17,8 @@ namespace MPowerKit.MediaPlugin;
 
 public class State
 {
-    public TaskCompletionSource<List<MediaFile>?> Tcs { get; set; }
-    public UIViewController Controller { get; set; }
+    public required TaskCompletionSource<List<MediaFile>?> Tcs { get; set; }
+    public UIViewController? Controller { get; set; }
 }
 
 /// <summary>
@@ -72,7 +72,7 @@ public class MediaImplementation : IMedia
     {
         StatusBarStyle = UIApplication.SharedApplication.StatusBarStyle;
         IsCameraAvailable = UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)
-                                   | UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear);
+            | UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear);
 
         var availableCameraMedia = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.Camera) ?? [];
         var avaialbleLibraryMedia = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary) ?? [];
@@ -336,7 +336,7 @@ public class MediaImplementation : IMedia
         if (!notGranted.Any()) return;
 
         //Gunna need those permissions :(
-        throw new MediaPermissionException(notGranted.Select(r => r.Key).ToArray());
+        throw new MediaPermissionException([.. notGranted.Select(r => r.Key)]);
     }
 
     protected virtual void CheckUsageDescription(params string[] descriptionNames)

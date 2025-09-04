@@ -7,7 +7,7 @@ namespace MPowerKit.MediaPlugin;
 /// </summary>
 public static class Media
 {
-    private static Lazy<IMedia> _implementation = new(CreateMedia, LazyThreadSafetyMode.PublicationOnly);
+    private static readonly Lazy<IMedia> _implementation = new(CreateMedia, LazyThreadSafetyMode.PublicationOnly);
 
     /// <summary>
     /// Gets if the plugin is supported on the current platform.
@@ -19,12 +19,12 @@ public static class Media
     /// </summary>
     public static IMedia Current => _implementation.Value;
 
-    static IMedia CreateMedia()
+    private static IMedia CreateMedia()
     {
 #if ANDROID || MACIOS || WINDOWS
         return new MediaImplementation();
 #else
-        throw new NotImplementedException("MediaPlugin is not implemented for current platform");
+        return new MediaImplementationShared();
 #endif
     }
 

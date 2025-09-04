@@ -130,8 +130,6 @@ public class MediaImplementation : IMedia
     /// <returns>Media file or null if canceled</returns>
     public async Task<MediaFile?> PickPhotoAsync(PickRequest? request = null, CancellationToken token = default)
     {
-        request ??= new PickRequest();
-
         FileOpenPicker picker = new()
         {
             SuggestedStartLocation = PickerLocationId.PicturesLibrary,
@@ -163,8 +161,6 @@ public class MediaImplementation : IMedia
         MultiPickerOptions? pickerOptions = null,
         CancellationToken token = default)
     {
-        request ??= new PickRequest();
-
         var picker = new FileOpenPicker
         {
             SuggestedStartLocation = PickerLocationId.PicturesLibrary,
@@ -240,8 +236,6 @@ public class MediaImplementation : IMedia
     /// <returns>Media file of video or null if canceled</returns>
     public async Task<MediaFile?> PickVideoAsync(VideoPickRequest? request = null, CancellationToken token = default)
     {
-        request ??= new VideoPickRequest();
-
         var picker = new FileOpenPicker()
         {
             SuggestedStartLocation = PickerLocationId.VideosLibrary,

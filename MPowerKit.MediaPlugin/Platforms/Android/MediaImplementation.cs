@@ -16,10 +16,10 @@ public class State
 {
     public int RequestId { get; set; }
     public Uri? Path { get; set; }
-    public TaskCompletionSource<List<MediaFile>?> Tcs { get; set; }
+    public required TaskCompletionSource<List<MediaFile>?> Tcs { get; set; }
     public bool IsPhoto => Type == "image/*";
-    public string Action { get; set; }
-    public string Type { get; set; }
+    public required string Action { get; set; }
+    public required string Type { get; set; }
 }
 
 /// <summary>
@@ -31,7 +31,7 @@ public class MediaImplementation : IMedia
 
     protected int RequestId { get; set; }
 
-    protected IList<string> RequestedPermissions;
+    protected IList<string>? RequestedPermissions;
 
     protected State? State;
 
@@ -59,10 +59,10 @@ public class MediaImplementation : IMedia
         IsCameraAvailable = Context.PackageManager!.HasSystemFeature(PackageManager.FeatureCamera)
             || Context.PackageManager.HasSystemFeature(PackageManager.FeatureCameraFront);
 
-        OnActivityResultHandler += OnActivityResult;
+        OnActivityResultHandler = OnActivityResult;
     }
 
-    protected static event Action<int, Result, Intent?> OnActivityResultHandler;
+    protected static Action<int, Result, Intent?>? OnActivityResultHandler;
 
     public static void SendActivityResult(int requestCode, Result resultCode, Intent? data)
     {
