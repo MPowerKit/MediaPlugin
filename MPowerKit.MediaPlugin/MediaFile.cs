@@ -7,9 +7,9 @@ public sealed class MediaFile : IDisposable
 {
     private bool _isDisposed;
     private Func<Stream>? _streamGetter;
-    private Func<Stream>? _streamGetterForExternalStorage;
-    private string? _originalFilename;
-    private string? _path;
+    private readonly Func<Stream>? _streamGetterForExternalStorage;
+    private readonly string? _originalFilename;
+    private readonly string? _path;
     private string? _albumPath;
 
     /// <summary>
@@ -84,7 +84,7 @@ public sealed class MediaFile : IDisposable
         GC.SuppressFinalize(this);
     }
 
-    void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (_isDisposed)
             return;

@@ -25,12 +25,12 @@ public class CaptureRequest : MediaRequest
     /// <summary>
     /// Directory name
     /// </summary>
-    public string DesiredDirectory { get; set; }
+    public string? DesiredDirectory { get; set; }
 
     /// <summary>
     /// File name
     /// </summary>
-    public string DesiredName { get; set; }
+    public string? DesiredName { get; set; }
 }
 
 /// <summary>

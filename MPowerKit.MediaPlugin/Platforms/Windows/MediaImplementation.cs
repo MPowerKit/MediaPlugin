@@ -112,7 +112,7 @@ public class MediaImplementation : IMedia
         if (result is null)
         {
             var tcs = new TaskCompletionSource<MediaFile?>();
-            tcs.SetCanceled();
+            tcs.SetCanceled(token);
             return await tcs.Task;
         }
 
@@ -149,7 +149,7 @@ public class MediaImplementation : IMedia
         if (result is null)
         {
             var tcs = new TaskCompletionSource<MediaFile?>();
-            tcs.SetCanceled();
+            tcs.SetCanceled(token);
             return await tcs.Task;
         }
 
@@ -180,7 +180,7 @@ public class MediaImplementation : IMedia
         if (result is null)
         {
             var tcs = new TaskCompletionSource<List<MediaFile>?>();
-            tcs.SetCanceled();
+            tcs.SetCanceled(token);
             return await tcs.Task;
         }
 
@@ -218,7 +218,7 @@ public class MediaImplementation : IMedia
         if (result is null)
         {
             var tcs = new TaskCompletionSource<MediaFile?>();
-            tcs.SetCanceled();
+            tcs.SetCanceled(token);
             return await tcs.Task;
         }
 
@@ -255,7 +255,7 @@ public class MediaImplementation : IMedia
         if (result is null)
         {
             var tcs = new TaskCompletionSource<MediaFile?>();
-            tcs.SetCanceled();
+            tcs.SetCanceled(token);
             return await tcs.Task;
         }
 
@@ -322,7 +322,7 @@ public class MediaImplementation : IMedia
     /// <param name="filePath">The file image path</param>
     /// <param name="mediaOptions">The options.</param>
     /// <param name="exif">original metadata</param>
-    /// <returns>True if rotation or compression occured, else false</returns>
+    /// <returns>True if rotation or compression occurred, else false</returns>
     //Task<bool> ResizeAsync(StorageFile file, PickMediaOptions mediaOptions)
     //{
     //    return ResizeAsync(
@@ -348,7 +348,7 @@ public class MediaImplementation : IMedia
     /// <param name="quality">Image quality (1-100)</param>
     /// <param name="customPhotoSize">Custom size in percent</param>
     /// <param name="exif">original metadata</param>
-    /// <returns>True if rotation or compression occured, else false</returns>
+    /// <returns>True if rotation or compression occurred, else false</returns>
     //    Task<bool> ResizeAsync(StorageFile file, StoreCameraMediaOptions mediaOptions)
     //    {
     //        if (file is null) throw new ArgumentNullException(nameof(file));

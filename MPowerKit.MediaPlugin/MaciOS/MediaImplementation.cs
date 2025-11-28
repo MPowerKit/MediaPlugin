@@ -75,9 +75,9 @@ public class MediaImplementation : IMedia
             | UIImagePickerController.IsCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear);
 
         var availableCameraMedia = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.Camera) ?? [];
-        var avaialbleLibraryMedia = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary) ?? [];
+        var availableLibraryMedia = UIImagePickerController.AvailableMediaTypes(UIImagePickerControllerSourceType.PhotoLibrary) ?? [];
 
-        foreach (var type in availableCameraMedia.Concat(avaialbleLibraryMedia))
+        foreach (var type in availableCameraMedia.Concat(availableLibraryMedia))
         {
             if (type == TypeMovie)
                 IsTakeVideoSupported = IsPickVideoSupported = true;
@@ -263,7 +263,7 @@ public class MediaImplementation : IMedia
     protected virtual void ConfigureController(UIViewController controller, State state)
     {
         if (controller.PresentationController is not null)
-            controller.PresentationController.Delegate = new PresentatControllerDelegate(state);
+            controller.PresentationController.Delegate = new PresentationControllerDelegate(state);
     }
 
     protected static UIImagePickerControllerCameraDevice GetUICameraDevice(CameraDevice device)
@@ -276,7 +276,7 @@ public class MediaImplementation : IMedia
         };
     }
 
-    protected static UIImagePickerControllerQualityType GetQuailty(VideoQuality quality)
+    protected static UIImagePickerControllerQualityType GetQuality(VideoQuality quality)
     {
         return quality switch
         {
@@ -346,7 +346,7 @@ public class MediaImplementation : IMedia
             var info = NSBundle.MainBundle.InfoDictionary;
 
             if (!info.ContainsKey(new NSString(description)))
-                throw new UnauthorizedAccessException($"On iOS 10 and higher you must set {description} in your Info.plist file to enable Authorization Requests for access!");
+                throw new UnauthorizedAccessException($"On iOS 10 and higher you must set {description} in your Info.Plist file to enable Authorization Requests for access!");
         }
     }
 }
@@ -440,11 +440,11 @@ public class PHPickerDelegate : PHPickerViewControllerDelegate
     }
 }
 
-public class PresentatControllerDelegate : UIAdaptivePresentationControllerDelegate
+public class PresentationControllerDelegate : UIAdaptivePresentationControllerDelegate
 {
     public State State { get; }
 
-    public PresentatControllerDelegate(State state)
+    public PresentationControllerDelegate(State state)
     {
         State = state;
     }
@@ -554,9 +554,9 @@ public class PhotoPickerDelegate : UIImagePickerControllerDelegate
 
         using var source = CGImageSource.FromData(image.AsJPEG()!);
 
-        var destData = new NSMutableData();
+        var destinationData = new NSMutableData();
 
-        using var destination = CGImageDestination.Create(destData, source!.TypeIdentifier!, 1, null);
+        using var destination = CGImageDestination.Create(destinationData, source!.TypeIdentifier!, 1, null);
         destination!.AddImage(source, 0, metadata);
         destination.Close();
         image.Dispose();
@@ -566,7 +566,7 @@ public class PhotoPickerDelegate : UIImagePickerControllerDelegate
 
         var url = NSUrl.FromFilename(fullPath);
 
-        destData!.Save(url, true);
+        destinationData!.Save(url, true);
 
         return url;
     }

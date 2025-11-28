@@ -613,7 +613,7 @@ public class MediaImplementation : IMedia
 
     protected virtual bool IsValidExif(ExifInterface exif)
     {
-        //if null, then not falid
+        //if null, then not valid
         if (exif is null) return false;
 
         try

@@ -3,7 +3,7 @@
 namespace MPowerKit.MediaPlugin;
 
 /// <summary>
-/// Cross platform Media implemenations
+/// Cross platform Media implementations
 /// </summary>
 public static class Media
 {
@@ -28,12 +28,12 @@ public static class Media
 #endif
     }
 
-    public static MauiAppBuilder UseMpowerKitMediaPlugin(this MauiAppBuilder builder)
+    public static MauiAppBuilder UseMPowerKitMediaPlugin(this MauiAppBuilder builder)
     {
-        return UseMpowerKitMediaPlugin(builder, false);
+        return UseMPowerKitMediaPlugin(builder, false);
     }
 
-    public static MauiAppBuilder UseMpowerKitMediaPlugin(this MauiAppBuilder builder, bool registerInterface)
+    public static MauiAppBuilder UseMPowerKitMediaPlugin(this MauiAppBuilder builder, bool registerInterface)
     {
         if (registerInterface)
         {
